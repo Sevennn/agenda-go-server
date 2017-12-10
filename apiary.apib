@@ -1,0 +1,237 @@
+FORMAT: 1A
+HOST: http://agenda12.apiblueprint.org/
+
+# Agenda
+
+Agenda is a simple API allowing consumers to schedule meeting on-line
+
+# Group User
+
+Resource operations related to a user in the API.
+
+## User-Key [/v1/user/getkey{?username,password}]
+
++ Parameters
+    - username : `root` (string, required) - User Name
+    - password : `pass` (required)
+
+### Get User Key [GET]
+
+get a security key for operations later
+
++ Response 200 (application/json)
+
+        {
+            "key":"1e3576bt",
+            "permissions":["user","admin"]
+        }
+
+# Group Admins
+
+Resource operations related to admins in the API.
+
+## Admin [/v1/admin{?key}]
+
++ Parameters
+    - key : `1e3576bt` (required)
+
+### Delete User [POST /v1/admin/delete{?key}]
+
+Delete a exist user
+
++ Parameters
+    - key : `1e3576bt` (required)
+
++ Request (application/json)
+
+        {
+            "id":1
+        }
+
+
++ Response 200 (application/json)
+
+        {
+            "success":true,
+            "error":none
+        }
+
+
+
+
+# Group Users
+
+Resources related to  users in the API.
+
+## Users Collection [/v1/users{?key}]
+
++ Parameters
+    - key : `1e3576bt` (string, required)
+
+### List all Users [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "id":1,
+                "username":"zhang3",
+                "password":"zhang",
+                "email":"zhang3@mail2.sysu.edu.cn",
+                "phone":12345678901
+            },{
+                "id":2,
+                "username":"li4",
+                "password":"li",
+                "email":"li4@mail2.sysu.edu.cn",
+                "phone":12345678901
+            }
+        ]
+
+### Create a New User [POST]
+
++ Request (application/json)
+
+        {
+            "username":"zhang3",
+            "password":"zhang",
+            "email":"zhang3@mail2.sysu.edu.cn",
+            "phone":12345678901
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users/1
+
+    + Body
+
+            {
+                "id": 1,
+                "username":"zhang3",
+                "email":"zhang3@mail2.sysu.edu.cn",
+                "phone":12345678901
+            }
+
+### Get User by ID [GET /v1/users/{id}]
+
++ Parameters
+    - id : `1` (int, required) - User Id
+
++ Response 200 (application/json)
+
+        {
+            "id" : 1,
+            "username":"zhang3",
+            "password":"zhang",
+            "email":"zhang3@mail2.sysu.edu.cn"
+        }
+
+# Group Meetings
+
+Resources related to  Meetings in the API.
+
+## Meetings Collection [/v1/meetings{?key}]
+
++ Parameters
+    - key : `1e3576bt` (string, required)
+
+### List all Meetings [GET]
+
++ Response 200 (application/json)
+
+        [
+            {
+                "mid":1,
+                "Sponsor":"zhang3",
+                "Participators":["zhang"]
+                "Title":"hhh",
+                "StartDate": 2017-11-11/11:11,
+                "EndDate": 2017-11-11/11:12,
+            }
+        ]
+
+### Create a New Meeting [POST]
+
++ Request (application/json)
+
+        {
+            "mid":1,
+            "Sponsor":"zhang3",
+            "Participators":["zhang"]
+            "Title":"hhh",
+            "StartDate": 2017-11-11/11:11,
+            "EndDate": 2017-11-11/11:12,
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /meetings/1
+
+    + Body
+
+            {
+                "mid":1,
+                "Sponsor":"zhang3",
+                "Participators":["zhang"]
+                "Title":"hhh",
+                "StartDate": 2017-11-11/11:11,
+                "EndDate": 2017-11-11/11:12,
+                "error":none
+            }
+
+
+### Get meeting by ID [GET /v1/meetings/{mid}]
+
++ Parameters
+    - mid : `1` (int, required) - Meeting Id
+
++ Response 200 (application/json)
+
+        {
+            "mid":1,
+            "Sponsor":"zhang3",
+            "Participators":["zhang"]
+            "Title":"hhh",
+            "StartDate": 2017-11-11/11:11,
+            "EndDate": 2017-11-11/11:12,
+        }
+
+
+### Update meeting by ID [POST /v1/meetings/update{?id,mid,key}]
+
++ Parameters
+    - mid : `1` (int, required) - Meeting Id
+    - id  : `1` (int, required) - User Id
+    - key : `1e3576t` (required) - User key
+
++ Request (application/json)
+
+        {
+            "mid":1,
+            "Sponsor":"zhang3",
+            "Participators":["zhang"]
+            "Title":"hh3",
+            "StartDate": 2017-11-11/11:11,
+            "EndDate": 2017-11-11/11:12,
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /meetings/1
+
+    + Body
+
+            {
+                "mid":1,
+                "Sponsor":"zhang3",
+                "Participators":["zhang"]
+                "Title":"hh3",
+                "StartDate": 2017-11-11/11:11,
+                "EndDate": 2017-11-11/11:12,
+            }
