@@ -49,12 +49,7 @@ Delete a exist user
         }
 
 
-+ Response 200 (application/json)
-
-        {
-            "success":true,
-            "error":none
-        }
++ Response 204
 
 
 
@@ -127,6 +122,35 @@ Resources related to  users in the API.
             "password":"zhang",
             "email":"zhang3@mail2.sysu.edu.cn"
         }
+
+### Update User Info [POST /v1/users/update{?key,id}]
+
++ Parameters
+    - key : `1b35842` (required) - User Key
+    - id  : `1` (required) - User Id
+
++ Request (application/json)
+
+        {
+            "username":"zhang3",
+            "password":"zhang",
+            "email":"zhang3@mail2.sysu.edu.cn",
+            "phone":12345678911
+        }
+
++ Response 201 (application/json)
+
+    + Headers
+
+            Location: /users/1
+
+    + Body
+
+            {
+                "username":"zhang3",
+                "email":"zhang3@mail2.sysu.edu.cn",
+                "phone":12345678901
+            }
 
 # Group Meetings
 
@@ -204,14 +228,13 @@ Resources related to  Meetings in the API.
 ### Update meeting by ID [POST /v1/meetings/update{?id,mid,key}]
 
 + Parameters
-    - mid : `1` (int, required) - Meeting Id
     - id  : `1` (int, required) - User Id
     - key : `1e3576t` (required) - User key
+    - mid : `1` (int, required) - Meeting Id
 
 + Request (application/json)
 
         {
-            "mid":1,
             "Sponsor":"zhang3",
             "Participators":["zhang"]
             "Title":"hh3",
