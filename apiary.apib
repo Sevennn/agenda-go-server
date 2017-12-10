@@ -35,18 +35,13 @@ Resource operations related to admins in the API.
 + Parameters
     - key : `1e3576bt` (required)
 
-### Delete User [POST /v1/admin/delete{?key}]
+### Delete User [DELETE /v1/admin/delete/{id}{?key}]
 
 Delete a exist user
 
 + Parameters
     - key : `1e3576bt` (required)
-
-+ Request (application/json)
-
-        {
-            "id":1
-        }
+    - id  : `1` (int, required)
 
 
 + Response 204
@@ -225,7 +220,7 @@ Resources related to  Meetings in the API.
         }
 
 
-### Update meeting by ID [POST /v1/meetings/update{?id,mid,key}]
+### Update Meeting by ID [POST /v1/meetings/update{?id,mid,key}]
 
 + Parameters
     - id  : `1` (int, required) - User Id
@@ -258,3 +253,12 @@ Resources related to  Meetings in the API.
                 "StartDate": 2017-11-11/11:11,
                 "EndDate": 2017-11-11/11:12,
             }
+            
+            
+### Delete Meeting by Id [DELETE /v1/meetings/{mid}{?key}]
+
++ Parameters
+    - mid: `1` (int, required) - Meeting Id
+    - key: `1e5sasd` (required) - User Key
+
++ Response 204
