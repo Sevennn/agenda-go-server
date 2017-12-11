@@ -225,7 +225,7 @@ func TestUpdateMeeting(t *testing.T) {
 				return v.Sponsor == "u1"
 			},
 				func(v *Meeting) {
-					v.Title = "u1 Sponsor"
+					v.Title += "u1 Sponsor"
 				}},
 			2,
 		},

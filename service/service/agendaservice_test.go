@@ -26,15 +26,12 @@ var meetings = []entity.Meeting{
 }
 
 func init()  {
-	du := entity.DeleteUser(func (m *entity.User) bool {
+	entity.DeleteUser(func (m *entity.User) bool {
 		return true
 	})
-	dm := entity.DeleteMeeting(func (m *entity.Meeting) bool {
+	entity.DeleteMeeting(func (m *entity.Meeting) bool {
 		return true
 	})
-	loghelper.Error.Println("ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
-		return true
-	}), du, dm)
 }
 
 func _testLogin(u *entity.User) {
@@ -221,12 +218,9 @@ func TestCreateMeeting(t *testing.T) {
 		args args
 		want bool
 	}{
-		{"CM new", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, true},
-		{"CM exit", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, false},
+		{"CM new", args{users[0].Name, meetings[2].Title, "0001-01-01/00:00", "0002-01-01/00:00", nil}, true},
+		{"CM exit", args{users[0].Name, meetings[2].Title, "0001-01-01/00:00", "0002-01-01/00:00", nil}, false},
 	}
-	t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
-		return true
-	}))
 	_testLogin(&users[0])
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -234,9 +228,9 @@ func TestCreateMeeting(t *testing.T) {
 				t.Errorf("CreateMeeting() = %v, want %v", got, tt.want)
 			}
 		})
-		t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
-				return true
-			}))
+		// t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		// 		return true
+		// 	}))
 	}
 	_reset()
 }
@@ -395,6 +389,9 @@ func TestRemoveMeetingParticipator(t *testing.T) {
 				t.Errorf("RemoveMeetingParticipator() = %v, want %v", got, tt.want)
 			}
 		})
+		// t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		// 	return true
+		// }))
 	}
 	_reset()
 }

@@ -138,6 +138,8 @@ func UpdateMeeting(filter MeetingFilter, switcher func (*Meeting)) int {
 		if v := &mData[i]; filter(v) {
 			origin := v.Copy()
 			switcher(v)
+			// loghelper.Error.Println("UpdateMeeting:", origin)
+			// loghelper.Error.Println("UpdateMeeting:", v)
 			updateMeeting(origin, v)
 			count++
 		}
