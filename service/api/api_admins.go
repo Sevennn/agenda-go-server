@@ -1,7 +1,11 @@
 package api
-
-func DeleteUser(uid int) {
-	return entity.DeleteUser(func (u *entity.User) bool {
-		return u.ID == uid 
-	}) == 1;
+import (
+	"agenda-go-server/service/service"
+)
+func DeleteUser(uname string) bool {
+	if flag := service.DeleteUser(uname); flag {
+		return true
+	} else {
+		return false
+	}
 }

@@ -1,126 +1,25 @@
 package api
 
 import (
-	"agenda-go-server/service"
+	"agenda-go-server/service/service"
+	"agenda-go-server/service/entity"
 )
 
-func ListAllMeetings(int uid) (bool, []entity.Meeting) {
-	u := entity.QueryUser(func (u *entity.User) bool {
-		return u.ID == uid
-	})
-	if len(u) == 0 {
-		return false,nil
-	}
-	return true, entity.QueryMeeting(func (m *entity.Meeting) {
-		return m.Sponsor == u.Name || m.IsParticipator(u.Name)
+func ListAllMeetings(uname string) ([]entity.Meeting) {
+	return entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return m.Sponsor == uname || m.IsParticipator(uname)
 	})
 }
 
-func CreateMeeting(info map[string][]string) (bool,int) {
-	u := entity.QueryUser(func (u *entity.User) bool {
-		return u.ID == info[`uid`]
-	})
-	sponsor := u.Name
-	participator := info[`Participators`]
-	title := info[`Title`]
-	startdate := info[`StartDate`]
-	enddate := info[`EndDate`]
-	for _, i := range participator {
-		if username == i {
-			errLog.Println("Create Meeting: sponsor can't be participator")
-			return false,0
-		}
-		l := entity.QueryUser(func (u *entity.User) bool{
-			return u.Name == i
-		})
-		if (len(l) == 0) {
-			errLog.Println("Create Meeting: no such a user : ", i)
-			return false,0
-		}
-		dc := 0
-		for _, j := range participator {
-			if j == i {
-				dc++
-				if dc == 2 {
-					errLog.Println("Create Meeting: duplicate participator")
-					return false,0
-				}
-			}
-		}
-	}
-	sTime,err := entity.StringToDate(startDate)
-	if err != nil {
-		errLog.Println("Create Meeting: Wrong Date")
-		return false,0
-	}
-	eTime,err := entity.StringToDate(endDate)
-	if err != nil {
-		errLog.Println("Create Meeting: Wrong Date")
-		return false,0
-	}
-	if eTime.LessThan(sTime) == true {
-		errLog.Println("Create Meeting: Start Time greater than end time")
-		return false,0
-	}
-	for _, p := range participator {
-		l := entity.QueryMeeting(func (m *entity.Meeting) bool {
-			if m.Sponsor == p || m.IsParticipator(p) {
-				if m.StartDate.LessOrEqual(sTime) && m.EndDate.MoreThan(sTime) {
-					return true
-				}
-				if m.StartDate.LessThan(eTime) && m.EndDate.GreateOrEqual(eTime) {
-					return true
-				}
-				if m.StartDate.GreateOrEqual(sTime) && m.EndDate.LessOrEqual(eTime) {
-					return true
-				}
-			}
-			return false
-		})
-		if len(l) > 0 {
-			errLog.Println("Create Meeting: ",p," time conflict")
-			return false,0
-		}
-	}
-	tu := entity.QueryUser(func (u *entity.User) bool {
-		return u.Name == username
-	})
-	if len(tu) == 0 {
-		errLog.Println("Create Meeting: Sponsor ", username, " not exist")
-		return false,0
-	}
-	l := entity.QueryMeeting(func (m *entity.Meeting) bool {
-		if m.Sponsor == username || m.IsParticipator(username) {
-			if m.StartDate.LessOrEqual(sTime) && m.EndDate.MoreThan(sTime) {
-				return true
-			}
-			if m.StartDate.LessThan(eTime) && m.EndDate.GreateOrEqual(eTime) {
-				return true
-			}
-			if m.StartDate.GreateOrEqual(sTime) && m.EndDate.LessOrEqual(eTime) {
-				return true
-			}
-		}
-		return false
-	})
-
-	if len(l) > 0 {
-		errLog.Println("Create Meeting: ", username, " time conflict")
-		return false,0
-	}
-	mid := entity.CreateMeeting(&entity.Meeting{username, participator,sTime,eTime, title})
-	return true,mid
+func CreateMeeting(info map[string][]string) (bool) {
+	return service.CreateMeeting(info[`Sponsor`][0], info[`title`][0], info[`StartDate`][0], info[`EndDate`][0], info[`Participators`])
 }
 
-func GetMeetingByID(mid int) entity.Meeting {
-	m := entity.QueryMeeting(func (m *entity.Meeting) {
-		return m.ID == mid
+func GetMeetingByTitle(title string) []entity.Meeting {
+	return entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return m.Title == title
 	})
-	if len(m) != 1 {
-		return {}
-	} else {
-		return m[0]
-	}
+
 }
 
 // func UpdateMeeting(mid int, uid int, info map[string][]string) (bool, int) {
@@ -169,8 +68,8 @@ func GetMeetingByID(mid int) entity.Meeting {
 // }
 
 
-func DeleteMeeting(mid int) bool {
-	return entity.DeleteMeeting(func (m *entity.Meeting) bool {
-		return m.ID == mid
-	}) == 1;
-}
+// func DeleteMeeting(mid int) bool {
+// 	return entity.DeleteMeeting(func (m *entity.Meeting) bool {
+// 		return m.ID == mid
+// 	}) == 1;
+// }
