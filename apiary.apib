@@ -68,13 +68,13 @@ Resources related to  users in the API.
                 "username":"zhang3",
                 "password":"zhang",
                 "email":"zhang3@mail2.sysu.edu.cn",
-                "phone":12345678901
+                "phone":"U12345678901"
             },{
                 "id":2,
                 "username":"li4",
                 "password":"li",
                 "email":"li4@mail2.sysu.edu.cn",
-                "phone":12345678901
+                "phone":"12345678901"
             }
         ]
 
@@ -101,7 +101,7 @@ Resources related to  users in the API.
                 "id": 1,
                 "username":"zhang3",
                 "email":"zhang3@mail2.sysu.edu.cn",
-                "phone":12345678901
+                "phone":"12345678901"
             }
 
 ### Get User by ID [GET /v1/users/{id}]
@@ -130,7 +130,7 @@ Resources related to  users in the API.
             "username":"zhang3",
             "password":"zhang",
             "email":"zhang3@mail2.sysu.edu.cn",
-            "phone":12345678911
+            "phone":"12345678911"
         }
 
 + Response 201 (application/json)
@@ -144,7 +144,7 @@ Resources related to  users in the API.
             {
                 "username":"zhang3",
                 "email":"zhang3@mail2.sysu.edu.cn",
-                "phone":12345678901
+                "phone":"12345678901"
             }
 
 # Group Meetings
@@ -156,7 +156,11 @@ Resources related to  Meetings in the API.
 + Parameters
     - key : `1e3576bt` (string, required)
 
-### List all Meetings [GET]
+### List all Meetings [GET /v1/meetings{?key,id}]
+
++ Parameters
+    - key : `1e3576bt` (string, required)
+    - id  : `1`        (int, required) - User ID
 
 + Response 200 (application/json)
 
@@ -176,9 +180,8 @@ Resources related to  Meetings in the API.
 + Request (application/json)
 
         {
-            "mid":1,
-            "Sponsor":"zhang3",
-            "Participators":["zhang"]
+            "uid":1,
+            "Participators":["zhang"],
             "Title":"hhh",
             "StartDate": 2017-11-11/11:11,
             "EndDate": 2017-11-11/11:12,
