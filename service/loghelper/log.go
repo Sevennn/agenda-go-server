@@ -87,7 +87,7 @@ func GetGOPATH() *string {
 	}
 	goPath := strings.Split(os.Getenv("GOPATH"), sp)
 	for _, v := range goPath {
-		if _, err := os.Stat(filepath.Join(v, "/src/agenda-go-server/service/data/meetinginfo")); !os.IsNotExist(err) {
+		if _, err := os.Stat(filepath.Join(v, "/src/agenda-go-server/service/data/")); !os.IsNotExist(err) {
 			return &v
 		}
 	}

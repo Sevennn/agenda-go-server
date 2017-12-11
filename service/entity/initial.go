@@ -44,7 +44,7 @@ func init() {
 
 func insertUser(v *User) error {
 	if affected, err := orm.Insert(v); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("insertUser Error:", affected, err)
 		return err
 	}
 	return nil
@@ -52,7 +52,7 @@ func insertUser(v *User) error {
 
 func deleteUser(v *User) error {
 	if affected, err := orm.Delete(v); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("deleteUser Error:", affected, err)
 		return err
 	}
 	return nil
@@ -60,7 +60,7 @@ func deleteUser(v *User) error {
 
 func updateUser(origin, modify *User) error {
 	if affected, err := orm.Update(modify, origin); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("updateUser Error:", affected, err)
 		return err
 	}
 	return nil
@@ -69,7 +69,7 @@ func updateUser(origin, modify *User) error {
 func findAllUsers() []User {
 	vec := make([]User, 0)
 	if err := orm.Find(&vec); err != nil {
-		loghelper.Error.Println("FindAll Error:", err)
+		loghelper.Error.Println("findAllUsers Error:", err)
 	}
 	return vec
 }
@@ -91,7 +91,7 @@ func findUserByName(name string) *User {
 func insertMeeting(vv *Meeting) error {
 	v := vv.toMet()
 	if affected, err := orm.Insert(v); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("insertMeeting Error:", affected, err)
 		return err
 	}
 	return nil
@@ -113,7 +113,7 @@ func updateMeeting(origin, modify *Meeting) error {
 	o := origin.toMet()
 	m := modify.toMet()
 	if affected, err := orm.Update(m, o); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("updateMeeting Error:", affected, err)
 		return err
 	}
 	return nil
@@ -122,8 +122,9 @@ func updateMeeting(origin, modify *Meeting) error {
 func deleteMeeting(vv *Meeting) error {
 	v := vv.toMet()
 	if affected, err := orm.Delete(v); err != nil {
-		loghelper.Error.Println("Save Error:", affected, err)
+		loghelper.Error.Println("deleteMeeting Error:", affected, err)
 		return err
 	}
+	loghelper.Error.Println("deleteMeeting List All() = ", findAllMeetings())
 	return nil
 }

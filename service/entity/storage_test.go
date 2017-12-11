@@ -1,8 +1,7 @@
 package entity
 
 import (
-	"os"
-	// "agenda-go-server/service/loghelper"
+	//"agenda-go-server/service/loghelper"
 	// "os"
 	"reflect"
 	"testing"
@@ -21,6 +20,17 @@ var meetings = []Meeting{
 }
 
 func init() {
+	uData := findAllUsers()
+	for i := 0; i < len(uData); i++ {
+		deleteUser(&users[i])
+	}
+	mData := findAllMeetings()
+	for i := 0; i < len(mData); i++ {
+		deleteMeeting(&meetings[i])
+	}
+	// loghelper.Error.Println("ListAllMeeting() = ", QueryMeeting(func (m *Meeting) bool {
+	// 	return true
+	// }))
 }
 
 func TestCreateUser(t *testing.T) {
@@ -356,6 +366,4 @@ func TestSync(t *testing.T) {
 			// }
 		})
 	}
-
-	os.Remove(dbFilePath)
 }
