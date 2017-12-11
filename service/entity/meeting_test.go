@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"os"
 	"testing"
 )
 
@@ -49,6 +48,4 @@ func TestMeeting_AddParticipator(t *testing.T) {
 			}
 		})
 	}
-
-	os.Remove(dbFilePath)
 }

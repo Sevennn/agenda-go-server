@@ -18,7 +18,7 @@ type Meeting struct {
 // Met :
 type Met struct {
 	// Id int64 `xorm:"pk autoincr"`
-	Sponsor string `xorm:"notnull"`
+	Sponsor string `xorm:"pk notnull"`
 	Participators []string
 	StartDate, EndDate *time.Time
 	Title string `xorm:"pk"`

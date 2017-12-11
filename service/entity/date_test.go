@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"os"
 	"testing"
 )
 
@@ -48,6 +47,4 @@ func TestDate_MoreThan(t *testing.T) {
 			}
 		})
 	}
-
-	os.Remove(dbFilePath)
 }

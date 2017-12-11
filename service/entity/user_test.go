@@ -1,7 +1,6 @@
 package entity
 
 import (
-	"os"
 	"testing"
 )
 
@@ -22,6 +21,4 @@ func TestUser_GetPassword(t *testing.T) {
 			}
 		})
 	}
-
-	os.Remove(dbFilePath)
 }

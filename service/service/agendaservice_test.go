@@ -25,6 +25,18 @@ var meetings = []entity.Meeting{
 	{Sponsor:users[1].Name, Participators:[]string{users[2].Name}, StartDate:dates[1], EndDate:dates[2], Title:"TEST_AGENDASERVICE2 TEST_AGENDASERVICE3"},
 }
 
+func init()  {
+	du := entity.DeleteUser(func (m *entity.User) bool {
+		return true
+	})
+	dm := entity.DeleteMeeting(func (m *entity.Meeting) bool {
+		return true
+	})
+	loghelper.Error.Println("ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return true
+	}), du, dm)
+}
+
 func _testLogin(u *entity.User) {
 	UserLogout()
 	if re, err := UserRegister(users[0].Name, users[0].Password, users[0].Email, users[0].Phone); err != nil {
@@ -49,6 +61,12 @@ func _reset() {
 	DeleteUser(users[0].Name)
 	DeleteUser(users[1].Name)
 	DeleteUser(users[2].Name)
+	loghelper.Error.Println("REST ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return true
+	}))
+	// DeleteMeeting(meetings[0].Sponsor, meetings[0].Title)
+	// DeleteMeeting(meetings[1].Sponsor, meetings[1].Title)
+	// DeleteMeeting(meetings[2].Sponsor, meetings[2].Title)
 }
 
 func TestUserLogout(t *testing.T) {
@@ -173,12 +191,11 @@ func TestDeleteUser(t *testing.T) {
 }
 
 func TestListAllUser(t *testing.T) {
-	exitUsers := ListAllUser()
 	tests := []struct {
 		name string
 		want []entity.User
 	}{
-		{"List all", append(exitUsers, users[0], users[1], users[2])},
+		{"List all", append([]entity.User{}, users[0], users[1], users[2])},
 	}
 	_testLogin(&users[0])
 	for _, tt := range tests {
@@ -204,9 +221,12 @@ func TestCreateMeeting(t *testing.T) {
 		args args
 		want bool
 	}{
-		{"CM new", args{users[0].Name, meetings[0].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, true},
-		{"CM exit", args{users[0].Name, meetings[0].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, false},
+		{"CM new", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, true},
+		{"CM exit", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, false},
 	}
+	t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return true
+	}))
 	_testLogin(&users[0])
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -214,6 +234,9 @@ func TestCreateMeeting(t *testing.T) {
 				t.Errorf("CreateMeeting() = %v, want %v", got, tt.want)
 			}
 		})
+		t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+				return true
+			}))
 	}
 	_reset()
 }
