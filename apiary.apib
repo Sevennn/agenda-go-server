@@ -35,13 +35,13 @@ Resource operations related to admins in the API.
 + Parameters
     - key : `1e3576bt` (required)
 
-### Delete User [DELETE /v1/admin/delete/{id}{?key}]
+### Delete User [DELETE /v1/admin/delete/{name}{?key}]
 
 Delete a exist user
 
 + Parameters
     - key : `1e3576bt` (required)
-    - id  : `1` (int, required)
+    - name  : `zhang3` (string, required)
 
 
 + Response 204
@@ -64,13 +64,11 @@ Resources related to  users in the API.
 
         [
             {
-                "id":1,
                 "username":"zhang3",
                 "password":"zhang",
                 "email":"zhang3@mail2.sysu.edu.cn",
                 "phone":"U12345678901"
             },{
-                "id":2,
                 "username":"li4",
                 "password":"li",
                 "email":"li4@mail2.sysu.edu.cn",
@@ -93,36 +91,34 @@ Resources related to  users in the API.
 
     + Headers
 
-            Location: /users/1
+            Location: /users/zhang3
 
     + Body
 
             {
-                "id": 1,
                 "username":"zhang3",
                 "email":"zhang3@mail2.sysu.edu.cn",
                 "phone":"12345678901"
             }
 
-### Get User by ID [GET /v1/users/{id}]
+### Get User by Name [GET /v1/users/{name}]
 
 + Parameters
-    - id : `1` (int, required) - User Id
+    - name : `zhang3` (string, required) - User Name
 
 + Response 200 (application/json)
 
         {
-            "id" : 1,
             "username":"zhang3",
             "password":"zhang",
             "email":"zhang3@mail2.sysu.edu.cn"
         }
 
-### Update User Info [POST /v1/users/update{?key,id}]
+### Update User Info [POST /v1/users/update{?key,name}]
 
 + Parameters
     - key : `1b35842` (required) - User Key
-    - id  : `1` (required) - User Id
+    - name  : `zhang3` (string,required) - User name
 
 + Request (application/json)
 
@@ -137,7 +133,7 @@ Resources related to  users in the API.
 
     + Headers
 
-            Location: /users/1
+            Location: /users/zhang3
 
     + Body
 
@@ -156,17 +152,16 @@ Resources related to  Meetings in the API.
 + Parameters
     - key : `1e3576bt` (string, required)
 
-### List all Meetings [GET /v1/meetings{?key,id}]
+### List all Meetings [GET /v1/meetings{?key,name}]
 
 + Parameters
     - key : `1e3576bt` (string, required)
-    - id  : `1`        (int, required) - User ID
+    - name : `zhang3`  (string, required) - User Name
 
 + Response 200 (application/json)
 
         [
             {
-                "mid":1,
                 "Sponsor":"zhang3",
                 "Participators":["zhang"]
                 "Title":"hhh",
@@ -180,7 +175,7 @@ Resources related to  Meetings in the API.
 + Request (application/json)
 
         {
-            "uid":1,
+            "Sponsor": "zhang",
             "Participators":["zhang"],
             "Title":"hhh",
             "StartDate": 2017-11-11/11:11,
@@ -191,12 +186,11 @@ Resources related to  Meetings in the API.
 
     + Headers
 
-            Location: /meetings/1
+            Location: /meetings/hhh
 
     + Body
 
             {
-                "mid":1,
                 "Sponsor":"zhang3",
                 "Participators":["zhang"]
                 "Title":"hhh",
@@ -206,15 +200,14 @@ Resources related to  Meetings in the API.
             }
 
 
-### Get meeting by ID [GET /v1/meetings/{mid}]
+### Get meeting by Title [GET /v1/meetings/{title}]
 
 + Parameters
-    - mid : `1` (int, required) - Meeting Id
+    - title : `hhh` (string, required) - Meeting title
 
 + Response 200 (application/json)
 
         {
-            "mid":1,
             "Sponsor":"zhang3",
             "Participators":["zhang"]
             "Title":"hhh",
@@ -223,12 +216,12 @@ Resources related to  Meetings in the API.
         }
 
 
-### Update Meeting by ID [POST /v1/meetings/update{?id,mid,key}]
+### Update Meeting by ID [POST /v1/meetings/update{?name,title,key}]
 
 + Parameters
-    - id  : `1` (int, required) - User Id
+    - name  : `1` (int, required) - User name
     - key : `1e3576t` (required) - User key
-    - mid : `1` (int, required) - Meeting Id
+    - title : `1` (int, required) - Meeting title
 
 + Request (application/json)
 
@@ -244,12 +237,11 @@ Resources related to  Meetings in the API.
 
     + Headers
 
-            Location: /meetings/1
+            Location: /meetings/hh3
 
     + Body
 
             {
-                "mid":1,
                 "Sponsor":"zhang3",
                 "Participators":["zhang"]
                 "Title":"hh3",
@@ -258,10 +250,10 @@ Resources related to  Meetings in the API.
             }
             
             
-### Delete Meeting by Id [DELETE /v1/meetings/{mid}{?key}]
+### Delete Meeting by title [DELETE /v1/meetings/{title}{?key}]
 
 + Parameters
-    - mid: `1` (int, required) - Meeting Id
+    - title: `1` (int, required) - Meeting title
     - key: `1e5sasd` (required) - User Key
 
 + Response 204
