@@ -117,7 +117,7 @@ func GetMeetingByID(mid int) entity.Meeting {
 		return m.ID == mid
 	})
 	if len(m) != 1 {
-		return nil
+		return {}
 	} else {
 		return m[0]
 	}

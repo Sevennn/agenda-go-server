@@ -10,19 +10,21 @@ func ListAllUser() []entity.User {
 	})
 }
 
-func UserRegister(username string, password string, email string, phone string) (bool, error) {
+func UserRegister(info map[string][]string) (bool, int) {
+	username := info[`username`]
+	password := info[`password`]
+	email := info[`email`]
+	phone := info[`phone`]
 	user := entity.QueryUser(func (u *entity.User) bool {
 		return u.Name == username
 	})
 	if len(user) == 1 {
 		errLog.Println("User Register: Already exist username")
-		return false, nil
+		return false, 0
 	}
-	entity.CreateUser(&entity.User{username, password, email, phone})
-	if err := entity.Sync(); err != nil {
-		return true, err
-	}
-	return true, nil
+	uid := entity.CreateUser(&entity.User{username, password, email, phone})
+
+	return true, uid
 }
 
 func GetUserByID(int id) (entity.User) {
