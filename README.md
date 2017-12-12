@@ -13,11 +13,14 @@
 ### 我们提供的接口
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/5%E4%B8%AAapi.png)
 ## 实验过程运行截图
+
 ### 开始时没有用户
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%BC%80%E5%A7%8B%E6%97%B6%E6%B2%A1%E6%9C%89%E7%94%A8%E6%88%B7.png)
 ### 建立了用户后查询，以及创立多个用户
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7.png)
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7.png)
+### post信息给服务器
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%8E%A8%E9%80%81%E4%BC%9A%E8%AE%AE%E4%BF%A1%E6%81%AF.png)
 ### 开始时没有会议
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%9F%A5%E8%AF%A2%E4%BC%9A%E8%AE%AE.png)
 ### 成功创立会议
