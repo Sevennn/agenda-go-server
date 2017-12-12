@@ -1,17 +1,17 @@
 FROM golang:1.8
-RUN mkdir -p /go/src/github.com/freakkid/service-agenda/
-WORKDIR /gocode/src/github.com/freakkid/service-agenda/
+RUN mkdir -p /gocode/hw8/agenda-go-server
+WORKDIR /gocode/hw8/agenda-go-server
 COPY . .
 
-WORKDIR /gocode/src/github.com/freakkid/service-agenda/cli
+WORKDIR /gocode/hw8/agenda-go-server/cli
 RUN go-wrapper download
 RUN go build -o agenda
 RUN mv ./agenda /go/bin/
 
-WORKDIR /gocode/src/github.com/freakkid/service-agenda/service
+WORKDIR /gocode/hw8/agenda-go-server/service
 RUN go-wrapper download
-RUN go build -o agendad
-RUN mv ./agendad /go/bin/
+RUN go build -o agenda
+RUN mv ./agendad/go/bin/
 
 RUN mv ../agenda.sh /
 
