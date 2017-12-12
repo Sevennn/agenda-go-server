@@ -18,7 +18,7 @@ install: true
 
 script:
   - cd $HOME/gopath/src/agenda-go-server
+  - go test -v agenda-go-server/service/service
   - go test -v agenda-go-server/service/loghelper
   - go test -v agenda-go-server/service/entity
-  - go test -v agenda-go-server/service/service
 
