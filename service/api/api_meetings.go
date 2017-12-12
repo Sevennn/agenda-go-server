@@ -3,6 +3,7 @@ package api
 import (
 	"agenda-go-server/service/service"
 	"agenda-go-server/service/entity"
+	"fmt"
 )
 
 func ListAllMeetings(uname string) ([]entity.Meeting) {
@@ -12,6 +13,7 @@ func ListAllMeetings(uname string) ([]entity.Meeting) {
 }
 
 func CreateMeeting(info map[string][]string) (bool) {
+	fmt.Println(info[`Participators`][0])
 	return service.CreateMeeting(info[`Sponsor`][0], info[`title`][0], info[`StartDate`][0], info[`EndDate`][0], info[`Participators`])
 }
 
