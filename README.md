@@ -10,42 +10,6 @@
 	3. 使用 API 设计工具提供 Mock 服务，两个团队独立测试 API
 	4. 使用 travis 测试相关模块
 	5. 利用 dockerfile 在 docker hub 上构建一个镜像，同时包含 agenda cli 和 agenda service， 如果 mysql 包含 服务器 和 客户端一样
-## agenda 开发项目基本要求
-	cli 目录
-	service 目录
-	.travis
-	apiary.apib
-	dockerfile
-	LICENSE
-	README.md
-	README-yourid.md 记录你的工作摘要（个人评分依据）
-	API 开发 
-	使用 API Blueprint 设计 API
-	资源 URL 命名符合 RESTful 设计标准
-	资源 CRUD 基本完整
-	API 客户端开发 
-	可用命令 5 个以上
-	必须有 XXX-test.go 文件
-	服务端开发 
-	使用 sqlite3 作为数据库
-	建议使用课程提供的服务端框架
-	必须有 XXX-test.go 文件
-	容器镜像制作 
-	在 docker hub 上生成镜像
-	base 镜像 go-1.8
-	需要加载 sqlite3
-	同时包含客户端与服务器
-	README.md 
-	有 build pass 标签
-	有简短使用说明
-	有系统测试的结果（包含如何下载镜像，如何启动服务器，如何使用命令行，cli 的 mock 测试结果， 综合系统测试结果）
-	README-yourid.md 
-	fork 项目的位置
-	个人工作摘要（每次提交）
-	项目小结
-	注意
-	开发过程中会有许多问题，如 golang/x 包本地构建镜像无法下载等。
-	yourid 建议不要使用个人真实姓名
 ## 实验过程运行截图
 ### 开始时没有用户
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%BC%80%E5%A7%8B%E6%97%B6%E6%B2%A1%E6%9C%89%E7%94%A8%E6%88%B7.png)
