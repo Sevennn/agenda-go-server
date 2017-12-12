@@ -1,6 +1,8 @@
 package routes
 import (
 	"net/http"
+	//"net/url"
+	"path/filepath"
 	"agenda-go-server/service/api"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
@@ -57,7 +59,9 @@ func UserRegisterHandler(formatter *render.Render) http.HandlerFunc {
 func GetUserByNameHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		us := api.GetUserByName(req.Form[`name`][0])
+		path := filepath.FromSlash(req.RequestURI)
+		_, name := filepath.Split(path)
+		us := api.GetUserByName(name)
 		if len(us) != 1 {
 			r.JSON(w, 200, us)
 		} else {
@@ -70,7 +74,9 @@ func GetUserByNameHandler(r *render.Render) http.HandlerFunc {
 func GetAllMeetingHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		res := api.ListAllMeetings(req.Form[`name`][0])
+		path := filepath.FromSlash(req.RequestURI)
+		_, name := filepath.Split(path)
+		res := api.ListAllMeetings(name)
 		r.JSON(w,200,res)
 	}
 }
@@ -91,6 +97,8 @@ func CreateMeetingHandler(r *render.Render) http.HandlerFunc {
 func GetMeetingByTitleHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		r.JSON(w,200,api.GetMeetingByTitle(req.Form[`title`][0]))
+		path := filepath.FromSlash(req.RequestURI)
+		_, name := filepath.Split(path)
+		r.JSON(w,200,api.GetMeetingByTitle(name))
 	}
 }
