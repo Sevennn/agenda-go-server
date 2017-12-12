@@ -5,27 +5,6 @@ HOST: http://agenda12.apiblueprint.org/
 
 Agenda is a simple API allowing consumers to schedule meeting on-line
 
-# Group User
-
-Resource operations related to a user in the API.
-
-## User-Key [/v1/user/getkey{?username,password}]
-
-+ Parameters
-    - username : `root` (string, required) - User Name
-    - password : `pass` (required)
-
-### Get User Key [GET]
-
-get a security key for operations later
-
-+ Response 200 (application/json)
-
-        {
-            "key":"1e3576bt",
-            "permissions":["user","admin"]
-        }
-
 # Group Admins
 
 Resource operations related to admins in the API.
@@ -35,12 +14,11 @@ Resource operations related to admins in the API.
 + Parameters
     - key : `1e3576bt` (required)
 
-### Delete User [DELETE /v1/admin/delete/{name}{?key}]
+### Delete User [DELETE /v1/admin/delete/{name}]
 
 Delete a exist user
 
 + Parameters
-    - key : `1e3576bt` (required)
     - name  : `zhang3` (string, required)
 
 
@@ -53,10 +31,8 @@ Delete a exist user
 
 Resources related to  users in the API.
 
-## Users Collection [/v1/users{?key}]
+## Users Collection [/v1/users]
 
-+ Parameters
-    - key : `1e3576bt` (string, required)
 
 ### List all Users [GET]
 
@@ -114,10 +90,9 @@ Resources related to  users in the API.
             "email":"zhang3@mail2.sysu.edu.cn"
         }
 
-### Update User Info [POST /v1/users/update{?key,name}]
+### Update User Info [POST /v1/users/update{?name}]
 
 + Parameters
-    - key : `1b35842` (required) - User Key
     - name  : `zhang3` (string,required) - User name
 
 + Request (application/json)
@@ -147,15 +122,12 @@ Resources related to  users in the API.
 
 Resources related to  Meetings in the API.
 
-## Meetings Collection [/v1/meetings{?key}]
+## Meetings Collection [/v1/meetings]
+
+
+### List all Meetings [GET /v1/meetings{?name}]
 
 + Parameters
-    - key : `1e3576bt` (string, required)
-
-### List all Meetings [GET /v1/meetings{?key,name}]
-
-+ Parameters
-    - key : `1e3576bt` (string, required)
     - name : `zhang3`  (string, required) - User Name
 
 + Response 200 (application/json)
@@ -216,11 +188,10 @@ Resources related to  Meetings in the API.
         }
 
 
-### Update Meeting by ID [POST /v1/meetings/update{?name,title,key}]
+### Update Meeting by ID [POST /v1/meetings/update{?name,title}]
 
 + Parameters
     - name  : `1` (int, required) - User name
-    - key : `1e3576t` (required) - User key
     - title : `1` (int, required) - Meeting title
 
 + Request (application/json)
@@ -250,10 +221,9 @@ Resources related to  Meetings in the API.
             }
             
             
-### Delete Meeting by title [DELETE /v1/meetings/{title}{?key}]
+### Delete Meeting by title [DELETE /v1/meetings/{title}]
 
 + Parameters
-    - title: `1` (int, required) - Meeting title
-    - key: `1e5sasd` (required) - User Key
+    - title: `1` (int, required) - Meeting titlep
 
 + Response 204
