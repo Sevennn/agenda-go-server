@@ -54,3 +54,60 @@
 ### 用用户名字查询其相关信息
 ### 用会议名字自查询相关信息
 
+## Docker安装过程
+
+### 使用 APT 镜像源 安装
+
+	由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
+
+	```bash
+	$ sudo apt-get update
+
+	$ sudo apt-get install \
+	    apt-transport-https \
+	    ca-certificates \
+	    curl \
+	    software-properties-common
+	```
+
+	鉴于国内网络问题，强烈建议使用国内源，官方源请在注释中查看。
+
+	为了确认所下载软件包的合法性，需要添加软件源的 GPG 密钥。
+
+	```bash
+	$ curl -fsSL https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu/gpg | sudo apt-key add -
+
+
+### 官方源
+### $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+```
+
+	然后，我们需要向 `source.list` 中添加 Docker 软件源
+
+	```bash
+	$ sudo add-apt-repository \
+	    "deb [arch=amd64] https://mirrors.ustc.edu.cn/docker-ce/linux/ubuntu \
+	    $(lsb_release -cs) \
+	    stable"
+
+
+	更新 apt 软件包缓存，并安装 `docker-ce`：
+
+	```bash
+	$ sudo apt-get update
+
+	$ sudo apt-get install docker-ce
+	```
+
+### 启动 Docker CE
+
+	```bash
+	$ sudo systemctl enable docker
+	$ sudo systemctl start docker
+	```
+
+	Ubuntu 14.04 请使用以下命令启动：
+
+	```bash
+	$ sudo service docker start
+	```
