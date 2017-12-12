@@ -79,8 +79,8 @@
 
 
 ### 官方源
+
 ### $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-```
 
 	然后，我们需要向 `source.list` 中添加 Docker 软件源
 
