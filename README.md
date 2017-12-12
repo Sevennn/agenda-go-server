@@ -10,6 +10,9 @@
 	3. 使用 API 设计工具提供 Mock 服务，两个团队独立测试 API
 	4. 使用 travis 测试相关模块
 	5. 利用 dockerfile 在 docker hub 上构建一个镜像，同时包含 agenda cli 和 agenda service， 如果 mysql 包含 服务器 和 客户端一样
+### apiary截图
+[apiary网站](https://agenda17.docs.apiary.io/#reference/admins/list-all-users)
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/apiary.png)
 ### 我们提供的接口
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/5%E4%B8%AAapi.png)
 ## 实验过程运行截图
