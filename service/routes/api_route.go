@@ -59,8 +59,8 @@ func GetUserByNameHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
 		var us *entity.User
-		if req.Form.Get("name") != "" {
-			us = api.GetUserByName(req.Form[`name`][0])
+		if name := req.Form.Get("name"); name != "" {
+			us = api.GetUserByName(name)
 		} else {
 			vars := mux.Vars(req)
 			us = api.GetUserByName(vars["name"])
@@ -77,8 +77,11 @@ func GetUserByNameHandler(r *render.Render) http.HandlerFunc {
 func GetAllMeetingHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		res := api.ListAllMeetings(req.Form[`name`][0])
-		r.JSON(w,200,res)
+		if name := req.Form.Get("name"); name != "" {
+			r.JSON(w, 200, api.ListAllMeetings(name))
+		} else {
+			r.JSON(w, 404, nil)
+		}
 	}
 }
 
@@ -87,10 +90,10 @@ func CreateMeetingHandler(r *render.Render) http.HandlerFunc {
 		req.ParseForm()
 		flag := api.CreateMeeting(req.PostForm)
 		if flag {
-			r.JSON(w,201,nil) // expected a user id
-			http.Redirect(w,nil, "meetings/"+req.PostForm[`Title`][0], http.StatusFound)
+			r.JSON(w, 201, nil) // expected a user id
+			http.Redirect(w, req, "meetings/"+req.PostForm[`title`][0], http.StatusFound)
 		} else {
-			r.JSON(w,404,nil)
+			r.JSON(w, 404, nil)
 		}
 	}
 }
@@ -98,6 +101,10 @@ func CreateMeetingHandler(r *render.Render) http.HandlerFunc {
 func GetMeetingByTitleHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		r.JSON(w,200,api.GetMeetingByTitle(req.Form[`title`][0]))
+		if title := req.Form.Get("title"); title != "" {
+			r.JSON(w, 200, api.GetMeetingByTitle(title))
+		} else {
+			r.JSON(w, 404, nil)
+		}
 	}
 }

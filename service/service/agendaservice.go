@@ -142,7 +142,7 @@ func CreateMeeting(username string, title string, startDate string, endDate stri
 			return false
 		})
 		if len(l) > 0 {
-			errLog.Println("Create Meeting: ",p," time conflict")
+			errLog.Println("Create Meeting: ",p," time conflict", l)
 			return false
 		}
 	}
@@ -172,8 +172,8 @@ func CreateMeeting(username string, title string, startDate string, endDate stri
 		errLog.Println("Create Meeting: ", username, " time conflict")
 		return false;
 	}
-	entity.CreateMeeting(&entity.Meeting{username, participator,sTime,eTime, title})
-	if err := entity.Sync(); err != nil {
+	if err := entity.CreateMeeting(&entity.Meeting{username, participator,sTime,eTime, title}); err != nil {
+		errLog.Println("Create Meeting: key conflict", err)
 		return false
 	}
 	return true
