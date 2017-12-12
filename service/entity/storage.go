@@ -46,8 +46,8 @@ func Sync() error {
 
 // CreateUser : create a user
 // @param a user object
-func CreateUser(v *User) {
-	insertUser(v)
+func CreateUser(v *User) error {
+	return insertUser(v)
 	// uData = append(uData, *v.Copy())
 	// dirty = true
 }
@@ -64,6 +64,13 @@ func QueryUser(filter UserFilter) []User {
 		}
 	}
 	return user
+}
+
+// QueryUserByName : query user
+// @param name
+// @return  user
+func QueryUserByName(v string) *User {
+	return findUserByName(v)
 }
 
 // UpdateUser : update users
@@ -107,8 +114,8 @@ func DeleteUser(filter UserFilter) int {
 
 // CreateMeeting : create a meeting
 // @param a meeting object
-func CreateMeeting(v *Meeting) {
-	insertMeeting(v)
+func CreateMeeting(v *Meeting) error {
+	return insertMeeting(v)
 	// mData = append(mData, *v.Copy())
 	// dirty = true
 }
@@ -127,6 +134,13 @@ func QueryMeeting(filter MeetingFilter) []Meeting {
 	return met
 }
 
+// QueryMeetingByTitle : query meeting
+// @param title
+// @return meeting
+func QueryMeetingByTitle(v string) *Meeting {
+	return findMeetingByTitle(v)
+}
+
 // UpdateMeeting : update meetings
 // @param a lambda function as the filter
 // @param a lambda function as the method to update the meeting
@@ -138,6 +152,8 @@ func UpdateMeeting(filter MeetingFilter, switcher func (*Meeting)) int {
 		if v := &mData[i]; filter(v) {
 			origin := v.Copy()
 			switcher(v)
+			// loghelper.Error.Println("UpdateMeeting:", origin)
+			// loghelper.Error.Println("UpdateMeeting:", v)
 			updateMeeting(origin, v)
 			count++
 		}

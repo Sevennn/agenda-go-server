@@ -1,6 +1,7 @@
 package api
 
 import (
+	"agenda-go-server/service/loghelper"
 	"agenda-go-server/service/service"
 	"agenda-go-server/service/entity"
 )
@@ -10,13 +11,15 @@ func ListAllUser() []entity.User {
 }
 
 func UserRegister(info map[string][]string) (bool, error) {
+	if info[`username`] == nil || info[`password`] == nil || info[`email`] == nil || info[`phone`] == nil {
+		loghelper.Info.Println("UserRegister: Error Parameter", info)
+		return false, nil
+	}
 	return service.UserRegister(info[`username`][0], info[`password`][0], info[`email`][0], info[`phone`][0])
 }
 
-func GetUserByName(uname string) ([]entity.User) {
-	return entity.QueryUser(func (u *entity.User) bool {
-		return u.Name == uname
-	})
+func GetUserByName(uname string) (*entity.User) {
+	return entity.QueryUserByName(uname)
 }
 // drop this method in homework
 // func UpdateUserInfo(int id, info map[string]string) bool {

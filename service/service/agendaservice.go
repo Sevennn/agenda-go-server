@@ -48,16 +48,9 @@ func UserLogin(username string, password string) bool {
 }
 
 func UserRegister(username string, password string, email string, phone string) (bool, error) {
-	user := entity.QueryUser(func (u *entity.User) bool {
-		return u.Name == username
-	})
-	if len(user) == 1 {
+	if err := entity.CreateUser(&entity.User{username, password, email, phone}); err != nil {
 		errLog.Println("User Register: Already exist username")
 		return false, nil
-	}
-	entity.CreateUser(&entity.User{username, password, email, phone})
-	if err := entity.Sync(); err != nil {
-		return true, err
 	}
 	return true, nil
 }
@@ -89,6 +82,12 @@ func ListAllUser() []entity.User {
 	})
 }
 
+func ListAllMeetings(uname string) []entity.Meeting {
+	return entity.QueryMeeting(func (m *entity.Meeting) bool {
+		return m.Sponsor == uname || m.IsParticipator(uname)
+	})
+}
+
 func CreateMeeting(username string, title string, startDate string, endDate string, participator []string) bool {
 	for _, i := range participator {
 		if username == i {
@@ -114,12 +113,12 @@ func CreateMeeting(username string, title string, startDate string, endDate stri
 		}
 	}
 	sTime,err := entity.StringToDate(startDate)
-	if err != nil {
+	if err != nil && entity.IsValid(sTime) {
 		errLog.Println("Create Meeting: Wrong Date")
 		return false
 	}
 	eTime,err := entity.StringToDate(endDate)
-	if err != nil {
+	if err != nil && entity.IsValid(eTime) {
 		errLog.Println("Create Meeting: Wrong Date")
 		return false
 	}
@@ -143,7 +142,7 @@ func CreateMeeting(username string, title string, startDate string, endDate stri
 			return false
 		})
 		if len(l) > 0 {
-			errLog.Println("Create Meeting: ",p," time conflict")
+			errLog.Println("Create Meeting: ",p," time conflict", l)
 			return false
 		}
 	}
@@ -173,8 +172,8 @@ func CreateMeeting(username string, title string, startDate string, endDate stri
 		errLog.Println("Create Meeting: ", username, " time conflict")
 		return false;
 	}
-	entity.CreateMeeting(&entity.Meeting{username, participator,sTime,eTime, title})
-	if err := entity.Sync(); err != nil {
+	if err := entity.CreateMeeting(&entity.Meeting{username, participator,sTime,eTime, title}); err != nil {
+		errLog.Println("Create Meeting: key conflict", err)
 		return false
 	}
 	return true

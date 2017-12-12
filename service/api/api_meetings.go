@@ -1,19 +1,29 @@
 package api
 
 import (
+	"agenda-go-server/service/loghelper"
 	"agenda-go-server/service/service"
 	"agenda-go-server/service/entity"
+<<<<<<< HEAD
+
+=======
 	"fmt"
+>>>>>>> sen/master
 )
 
 func ListAllMeetings(uname string) ([]entity.Meeting) {
-	return entity.QueryMeeting(func (m *entity.Meeting) bool {
-		return m.Sponsor == uname || m.IsParticipator(uname)
-	})
+	return service.ListAllMeetings(uname)
 }
 
 func CreateMeeting(info map[string][]string) (bool) {
+<<<<<<< HEAD
+	if info[`Sponsor`] == nil || info[`title`] == nil || info[`StartDate`] == nil || info[`EndDate`] == nil {
+		loghelper.Info.Println("CreateMeeting: Error Parameter", info)
+		return false
+	}
+=======
 	fmt.Println(info[`Participators`][0])
+>>>>>>> sen/master
 	return service.CreateMeeting(info[`Sponsor`][0], info[`title`][0], info[`StartDate`][0], info[`EndDate`][0], info[`Participators`])
 }
 

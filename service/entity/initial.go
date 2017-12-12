@@ -90,6 +90,7 @@ func findUserByName(name string) *User {
 
 func insertMeeting(vv *Meeting) error {
 	v := vv.toMet()
+	// loghelper.Error.Println("insertMeeting = ", vv, v)
 	if affected, err := orm.Insert(v); err != nil {
 		loghelper.Error.Println("insertMeeting Error:", affected, err)
 		return err
@@ -105,17 +106,38 @@ func findAllMeetings() []Meeting {
 	out := make([]Meeting, len(vec))
 	for i := 0; i < len(vec); i++ {
 		out[i] = *vec[i].toMet()
+		// loghelper.Error.Println("findAllMeetings = ", vec[i], out[i])
 	}
 	return out
 }
 
+func findMeetingByTitle(title string) *Meeting {
+	v := &Met{Title: title}
+	has, err := orm.Get(v)
+	if err != nil {
+		loghelper.Error.Println("findMeetingByTitle Error:", err)
+	}
+	if has {
+		return v.toMet()
+	}
+	return nil
+}
+
 func updateMeeting(origin, modify *Meeting) error {
-	o := origin.toMet()
-	m := modify.toMet()
-	if affected, err := orm.Update(m, o); err != nil {
-		loghelper.Error.Println("updateMeeting Error:", affected, err)
+	if affected, err := orm.Delete(origin.toMet()); err != nil {
+		loghelper.Error.Println("deleteMeeting Error:", affected, err)
 		return err
 	}
+	if affected, err := orm.Insert(modify.toMet()); err != nil {
+		loghelper.Error.Println("insertMeeting Error:", affected, err)
+		return err
+	}
+	// if affected, err := orm.Update(m, o); err != nil {
+	// 	loghelper.Error.Println("updateMeeting Error:", affected, err)
+	// 	return err
+	// } else {
+	// 	loghelper.Error.Println("updateMeeting affected:", affected)
+	// }
 	return nil
 }
 
@@ -125,6 +147,5 @@ func deleteMeeting(vv *Meeting) error {
 		loghelper.Error.Println("deleteMeeting Error:", affected, err)
 		return err
 	}
-	loghelper.Error.Println("deleteMeeting List All() = ", findAllMeetings())
 	return nil
 }

@@ -26,15 +26,22 @@ var meetings = []entity.Meeting{
 }
 
 func init()  {
-	du := entity.DeleteUser(func (m *entity.User) bool {
+	entity.DeleteUser(func (m *entity.User) bool {
 		return true
 	})
-	dm := entity.DeleteMeeting(func (m *entity.Meeting) bool {
+	entity.DeleteMeeting(func (m *entity.Meeting) bool {
 		return true
 	})
-	loghelper.Error.Println("ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
+	if vec := entity.QueryUser(func (vec *entity.User) bool {
 		return true
-	}), du, dm)
+	}); len(vec) != 0 {
+		loghelper.Error.Println("INIT ListAllUser() = ", vec)
+	}
+	if vec := entity.QueryMeeting(func (vec *entity.Meeting) bool {
+		return true
+	}); len(vec) != 0 {
+		loghelper.Error.Println("INIT ListAllMeeting() = ", vec)
+	}
 }
 
 func _testLogin(u *entity.User) {
@@ -61,9 +68,16 @@ func _reset() {
 	DeleteUser(users[0].Name)
 	DeleteUser(users[1].Name)
 	DeleteUser(users[2].Name)
-	loghelper.Error.Println("REST ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
+	if vec := entity.QueryUser(func (vec *entity.User) bool {
 		return true
-	}))
+	}); len(vec) != 0 {
+		loghelper.Error.Println("RESET ListAllUser() = ", vec)
+	}
+	if vec := entity.QueryMeeting(func (vec *entity.Meeting) bool {
+		return true
+	}); len(vec) != 0 {
+		loghelper.Error.Println("RESET ListAllMeeting() = ", vec)
+	}
 	// DeleteMeeting(meetings[0].Sponsor, meetings[0].Title)
 	// DeleteMeeting(meetings[1].Sponsor, meetings[1].Title)
 	// DeleteMeeting(meetings[2].Sponsor, meetings[2].Title)
@@ -221,12 +235,9 @@ func TestCreateMeeting(t *testing.T) {
 		args args
 		want bool
 	}{
-		{"CM new", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, true},
-		{"CM exit", args{users[0].Name, meetings[2].Title, "0000-00-00/00:00", "0001-00-00/00:00", nil}, false},
+		{"CM new", args{users[0].Name, meetings[2].Title, "0001-01-01/00:00", "0002-01-01/00:00", nil}, true},
+		{"CM exit", args{users[0].Name, meetings[2].Title, "0001-01-01/00:00", "0002-01-01/00:00", nil}, false},
 	}
-	t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
-		return true
-	}))
 	_testLogin(&users[0])
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
@@ -234,9 +245,9 @@ func TestCreateMeeting(t *testing.T) {
 				t.Errorf("CreateMeeting() = %v, want %v", got, tt.want)
 			}
 		})
-		t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
-				return true
-			}))
+		// t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		// 		return true
+		// 	}))
 	}
 	_reset()
 }
@@ -395,6 +406,9 @@ func TestRemoveMeetingParticipator(t *testing.T) {
 				t.Errorf("RemoveMeetingParticipator() = %v, want %v", got, tt.want)
 			}
 		})
+		// t.Errorf("ListAllMeeting() = %v", entity.QueryMeeting(func (m *entity.Meeting) bool {
+		// 	return true
+		// }))
 	}
 	_reset()
 }
