@@ -13,12 +13,12 @@ func ListAllMeetings(uname string) ([]entity.Meeting) {
 }
 
 func CreateMeeting(info map[string][]string) (bool) {
-	if info[`Sponsor`] == nil || info[`title`] == nil || info[`StartDate`] == nil || info[`EndDate`] == nil {
+	if info[`Sponsor`] == nil || info[`Title`] == nil || info[`StartDate`] == nil || info[`EndDate`] == nil {
 		loghelper.Info.Println("CreateMeeting: Error Parameter", info)
 		return false
 	}
 	fmt.Println(info[`Participators`][0])
-	return service.CreateMeeting(info[`Sponsor`][0], info[`title`][0], info[`StartDate`][0], info[`EndDate`][0], info[`Participators`])
+	return service.CreateMeeting(info[`Sponsor`][0], info[`Title`][0], info[`StartDate`][0], info[`EndDate`][0], info[`Participators`])
 }
 
 func GetMeetingByTitle(title string) []entity.Meeting {
