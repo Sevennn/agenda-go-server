@@ -92,7 +92,7 @@ func CreateMeetingHandler(r *render.Render) http.HandlerFunc {
 		flag := api.CreateMeeting(req.PostForm)
 		if flag {
 			r.JSON(w, 201, nil) // expected a user id
-			http.Redirect(w, req, "meetings/"+req.PostForm[`title`][0], http.StatusFound)
+			http.Redirect(w, req, "meetings/"+req.PostForm[`Title`][0], http.StatusFound)
 		} else {
 			r.JSON(w, 404, nil)
 		}
