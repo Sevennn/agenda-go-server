@@ -1,8 +1,7 @@
 package entity
 
 import (
-	//"agenda-go-server/service/loghelper"
-	// "os"
+	"agenda-go-server/service/loghelper"
 	"reflect"
 	"testing"
 )
@@ -28,9 +27,21 @@ func init() {
 	for i := 0; i < len(mData); i++ {
 		deleteMeeting(&meetings[i])
 	}
-	// loghelper.Error.Println("ListAllMeeting() = ", QueryMeeting(func (m *Meeting) bool {
-	// 	return true
-	// }))
+	if vec := findAllUsers(); len(vec) != 0 {
+		loghelper.Error.Println("ListAllUser() = ", vec)
+	}
+	if vec := findAllMeetings(); len(vec) != 0 {
+		loghelper.Error.Println("ListAllMeeting() = ", vec)
+	}
+}
+
+func _testCreateAll()  {
+	for i := 0; i < len(users); i++ {
+		CreateUser(&users[i])
+	}
+	for i := 0; i < len(meetings); i++ {
+		CreateMeeting(&meetings[i])
+	}
 }
 
 func TestCreateUser(t *testing.T) {
@@ -343,12 +354,7 @@ func TestSync(t *testing.T) {
 			// }
 			// uData = nil
 			// mData = nil
-			for i := 0; i < len(users); i++ {
-				CreateUser(&users[i])
-			}
-			for i := 0; i < len(meetings); i++ {
-				CreateMeeting(&meetings[i])
-			}
+			_testCreateAll()
 			uData := findAllUsers()
 			mData := findAllMeetings()
 			// if err := readFromFile(); err != nil {
@@ -364,6 +370,62 @@ func TestSync(t *testing.T) {
 			// if *curUserName != tt.name {
 			// 	t.Errorf("readFromFile() curUser = %v: want %v", *curUserName, tt.name)
 			// }
+		})
+	}
+}
+
+func TestQueryUserByName(t *testing.T) {
+	type args struct {
+		v string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *User
+	}{
+		{"Query exit",
+			args{users[0].Name},
+			&users[0],
+		},
+		{"Query no exit",
+			args{"NO_EXIT"},
+			nil,
+		},
+	}
+	_testCreateAll()
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := QueryUserByName(tt.args.v); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("QueryUserByName() = %v, want %v", got, tt.want)
+			}
+		})
+	}
+}
+
+func TestQueryMeetingByTitle(t *testing.T) {
+	type args struct {
+		v string
+	}
+	tests := []struct {
+		name string
+		args args
+		want *Meeting
+	}{
+		{"Query exit",
+			args{meetings[0].Title},
+			&meetings[0],
+		},
+		{"Query no exit",
+			args{"NO_EXIT"},
+			nil,
+		},
+	}
+	_testCreateAll()
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			if got := QueryMeetingByTitle(tt.args.v); !reflect.DeepEqual(got, tt.want) {
+				t.Errorf("QueryMeetingByTitle() = %v, want %v", got, tt.want)
+			}
 		})
 	}
 }

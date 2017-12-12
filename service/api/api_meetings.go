@@ -6,9 +6,7 @@ import (
 )
 
 func ListAllMeetings(uname string) ([]entity.Meeting) {
-	return entity.QueryMeeting(func (m *entity.Meeting) bool {
-		return m.Sponsor == uname || m.IsParticipator(uname)
-	})
+	return service.ListAllMeetings(uname)
 }
 
 func CreateMeeting(info map[string][]string) (bool) {

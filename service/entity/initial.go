@@ -111,6 +111,18 @@ func findAllMeetings() []Meeting {
 	return out
 }
 
+func findMeetingByTitle(title string) *Meeting {
+	v := &Met{Title: title}
+	has, err := orm.Get(v)
+	if err != nil {
+		loghelper.Error.Println("findMeetingByTitle Error:", err)
+	}
+	if has {
+		return v.toMet()
+	}
+	return nil
+}
+
 func updateMeeting(origin, modify *Meeting) error {
 	if affected, err := orm.Delete(origin.toMet()); err != nil {
 		loghelper.Error.Println("deleteMeeting Error:", affected, err)

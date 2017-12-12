@@ -32,6 +32,16 @@ func init()  {
 	entity.DeleteMeeting(func (m *entity.Meeting) bool {
 		return true
 	})
+	if vec := entity.QueryUser(func (vec *entity.User) bool {
+		return true
+	}); len(vec) != 0 {
+		loghelper.Error.Println("INIT ListAllUser() = ", vec)
+	}
+	if vec := entity.QueryMeeting(func (vec *entity.Meeting) bool {
+		return true
+	}); len(vec) != 0 {
+		loghelper.Error.Println("INIT ListAllMeeting() = ", vec)
+	}
 }
 
 func _testLogin(u *entity.User) {
@@ -58,9 +68,16 @@ func _reset() {
 	DeleteUser(users[0].Name)
 	DeleteUser(users[1].Name)
 	DeleteUser(users[2].Name)
-	loghelper.Error.Println("REST ListAllMeeting() = ", entity.QueryMeeting(func (m *entity.Meeting) bool {
+	if vec := entity.QueryUser(func (vec *entity.User) bool {
 		return true
-	}))
+	}); len(vec) != 0 {
+		loghelper.Error.Println("RESET ListAllUser() = ", vec)
+	}
+	if vec := entity.QueryMeeting(func (vec *entity.Meeting) bool {
+		return true
+	}); len(vec) != 0 {
+		loghelper.Error.Println("RESET ListAllMeeting() = ", vec)
+	}
 	// DeleteMeeting(meetings[0].Sponsor, meetings[0].Title)
 	// DeleteMeeting(meetings[1].Sponsor, meetings[1].Title)
 	// DeleteMeeting(meetings[2].Sponsor, meetings[2].Title)

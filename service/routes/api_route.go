@@ -1,5 +1,6 @@
 package routes
 import (
+	"agenda-go-server/service/entity"
 	"net/http"
 	"agenda-go-server/service/api"
 	"github.com/codegangsta/negroni"
@@ -47,7 +48,7 @@ func UserRegisterHandler(formatter *render.Render) http.HandlerFunc {
 		flag, _ := api.UserRegister(req.PostForm)
 		if flag == true {
 			formatter.JSON(w,201,nil) // expected a user id
-			http.Redirect(w,nil, "users/"+req.PostForm[`username`][0], 201)
+			http.Redirect(w,req, "users/"+req.PostForm[`username`][0], 201)
 		} else {
 			formatter.JSON(w,404,nil)
 		}
@@ -57,9 +58,15 @@ func UserRegisterHandler(formatter *render.Render) http.HandlerFunc {
 func GetUserByNameHandler(r *render.Render) http.HandlerFunc {
 	return func(w http.ResponseWriter, req *http.Request) {
 		req.ParseForm()
-		us := api.GetUserByName(req.Form[`name`][0])
-		if len(us) != 1 {
-			r.JSON(w, 200, us)
+		var us *entity.User
+		if req.Form.Get("name") != "" {
+			us = api.GetUserByName(req.Form[`name`][0])
+		} else {
+			vars := mux.Vars(req)
+			us = api.GetUserByName(vars["name"])
+		}
+		if us != nil {
+			r.JSON(w, 200, *us)
 		} else {
 			r.JSON(w,404,nil)
 		}

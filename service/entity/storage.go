@@ -66,6 +66,13 @@ func QueryUser(filter UserFilter) []User {
 	return user
 }
 
+// QueryUserByName : query user
+// @param name
+// @return  user
+func QueryUserByName(v string) *User {
+	return findUserByName(v)
+}
+
 // UpdateUser : update users
 // @param a lambda function as the filter
 // @param a lambda function as the method to update the user
@@ -125,6 +132,13 @@ func QueryMeeting(filter MeetingFilter) []Meeting {
 		}
 	}
 	return met
+}
+
+// QueryMeetingByTitle : query meeting
+// @param title
+// @return meeting
+func QueryMeetingByTitle(v string) *Meeting {
+	return findMeetingByTitle(v)
 }
 
 // UpdateMeeting : update meetings
