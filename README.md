@@ -14,6 +14,10 @@
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/5%E4%B8%AAapi.png)
 ## 实验过程运行截图
 
+### 启动后台
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%90%8E%E5%8F%B0%E6%93%8D%E4%BD%9C.png)
+### 后台运行截图
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%90%8E%E5%8F%B0%E8%BF%90%E8%A1%8C.png)
 ### 开始时没有用户
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%BC%80%E5%A7%8B%E6%97%B6%E6%B2%A1%E6%9C%89%E7%94%A8%E6%88%B7.png)
 ### 建立了用户后查询，以及创立多个用户
