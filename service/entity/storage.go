@@ -46,8 +46,8 @@ func Sync() error {
 
 // CreateUser : create a user
 // @param a user object
-func CreateUser(v *User) {
-	insertUser(v)
+func CreateUser(v *User) error {
+	return insertUser(v)
 	// uData = append(uData, *v.Copy())
 	// dirty = true
 }
@@ -107,8 +107,8 @@ func DeleteUser(filter UserFilter) int {
 
 // CreateMeeting : create a meeting
 // @param a meeting object
-func CreateMeeting(v *Meeting) {
-	insertMeeting(v)
+func CreateMeeting(v *Meeting) error {
+	return insertMeeting(v)
 	// mData = append(mData, *v.Copy())
 	// dirty = true
 }
