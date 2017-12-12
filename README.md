@@ -48,14 +48,20 @@
 	yourid 建议不要使用个人真实姓名
 ## 实验过程运行截图
 ### 开始时没有用户
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%BC%80%E5%A7%8B%E6%97%B6%E6%B2%A1%E6%9C%89%E7%94%A8%E6%88%B7.png)
 ### 建立了用户后查询，以及创立多个用户
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7.png)
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%A4%9A%E4%B8%AA%E7%94%A8%E6%88%B7.png)
 ### 开始时没有会议
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%9F%A5%E8%AF%A2%E4%BC%9A%E8%AE%AE.png)
 ### 成功创立会议
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%88%90%E5%8A%9F%E5%88%9B%E5%BB%BA%E4%BC%9A%E8%AE%AE.png)
 ### 用用户名字查询其相关信息
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E6%9F%A5%E8%AF%A2%E7%94%A8%E6%88%B7.png)
 ### 用会议名字自查询相关信息
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%90%8D%E5%AD%97%E6%9F%A5%E8%AF%A2%E4%BC%9A%E8%AE%AE.png)
 
 ## Docker安装过程
-
 ### 使用 APT 镜像源 安装
 
 	由于官方源使用 HTTPS 以确保软件下载过程中不被篡改。因此，我们首先需要添加使用 HTTPS 传输的软件包以及 CA 证书。
