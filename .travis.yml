@@ -1,0 +1,24 @@
+language: go
+
+go:
+  - 1.9
+  - tip
+
+notifications:
+  email: false
+
+go_import_path:
+  #/
+
+before_install:
+  - mv $HOME/gopath/src/github.com/LinJinghua/agenda-go-server $HOME/gopath/src
+  - go get -t -v agenda-go-server/service/...
+  - cd $HOME/gopath/src/agenda-go-server
+
+install: true
+
+script:
+  - go test -v agenda-go-server/service/entity
+  - go test -v agenda-go-server/service/loghelper
+  # - go test -v agenda-go-server/service/service
+

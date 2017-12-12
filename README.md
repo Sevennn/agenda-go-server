@@ -1,6 +1,6 @@
 # Agenda Service
 
-[![Build Status](https://travis-ci.org/Mensu/Agenda-cli-service-Go.svg?branch=master)](https://travis-ci.org/Mensu/Agenda-cli-service-Go)
+[![Build Status](https://travis-ci.org/LinJinghua/agenda-go-server.svg?branch=master)](https://travis-ci.org/LinJinghua/agenda-go-server)
 
 ## 概述
 	利用命令行 或 web 客户端调用远端服务是服务开发的重要内容。其中，要点是如何实现 API First 开发，使得团队协作变得更有效率。
