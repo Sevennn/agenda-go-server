@@ -12,8 +12,9 @@ go_import_path:
 
 before_install:
   - mv $HOME/gopath/src/github.com/LinJinghua/agenda-go-server $HOME/gopath/src
+  - go get -t -v agenda-go-server/service/...
 
-#install: true
+install: true
 
 script:
   - cd $HOME/gopath/src/agenda-go-server
