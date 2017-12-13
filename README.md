@@ -39,10 +39,10 @@
 
 ### 镜像下载和安装
 
-	docker pull stonelm/Agenda-go-server
-	docker run -dit --name Agenda-go-server -v $PATH_TO_SERVER_DATA:/data -p 8080:8080 stonelm/Agenda-go-server server
-	docker run --rm --network host -v $PATH_TO_CLI_DATA:/data stonelm/Agenda-go-server cli help
-	
+	docker pull 453326526/agenda-go-server
+	docker run -dit --name agenda-go-server -v $PATH_TO_SERVER_DATA:/data -p 8080:8080 453326526/agenda-go-server server
+	docker run --rm --network host -v $PATH_TO_CLI_DATA:/data 453326526/agenda-go-server cli help
+
 ## Docker安装过程
 ### 使用 APT 镜像源 安装
 
