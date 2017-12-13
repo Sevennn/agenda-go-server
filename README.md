@@ -37,6 +37,13 @@
 ### 用会议名字自查询相关信息
 ![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E5%90%8D%E5%AD%97%E6%9F%A5%E8%AF%A2%E4%BC%9A%E8%AE%AE.png)
 
+### 镜像下载和安装
+
+	```bash
+	docker pull stonelm/Agenda-go-server
+	docker run -dit --name Agenda-go-server -v $PATH_TO_SERVER_DATA:/data -p 8080:8080 stonelm/Agenda-go-server server
+	docker run --rm --network host -v $PATH_TO_CLI_DATA:/data stonelm/Agenda-go-server cli help
+	```
 ## Docker安装过程
 ### 使用 APT 镜像源 安装
 
@@ -93,3 +100,5 @@
 	```bash
 	$ sudo service docker start
 	```
+	
+
