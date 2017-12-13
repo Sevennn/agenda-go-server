@@ -6,14 +6,14 @@ import (
 	// _ "github.com/go-sql-driver/mysql"
 	// _ "github.com/lib/pq"
 	"github.com/go-xorm/xorm"
-	"agenda-go-server/service/loghelper"
+	"github.com/Sevennn/agenda-go-server/service/loghelper"
 	"path/filepath"
 )
 
 var orm *xorm.Engine
 // var logFile *os.File
 
-var dbFilePath = "/src/agenda-go-server/service/data/db.db"
+var dbFilePath = "/src/github.com/Sevennn/agenda-go-server/service/data/db.db"
 
 func init() {
 	dbFilePath = filepath.Join(loghelper.GoPath, dbFilePath)

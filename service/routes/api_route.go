@@ -1,10 +1,10 @@
 package routes
 import (
-	//"agenda-go-server/service/entity"
+	//"github.com/Sevennn/agenda-go-server/service/entity"
 	"net/http"
 	//"net/url"
 	"path/filepath"
-	"agenda-go-server/service/api"
+	"github.com/Sevennn/agenda-go-server/service/api"
 	"github.com/codegangsta/negroni"
 	"github.com/gorilla/mux"
 	"github.com/unrolled/render"

@@ -1,7 +1,7 @@
 package api
 
 import (
-	"agenda-go-server/service/service"
+	"github.com/Sevennn/agenda-go-server/service/service"
 	"encoding/base64"
 )
 

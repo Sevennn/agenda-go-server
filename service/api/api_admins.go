@@ -1,6 +1,6 @@
 package api
 import (
-	"agenda-go-server/service/service"
+	"github.com/Sevennn/agenda-go-server/service/service"
 )
 func DeleteUser(uname string) bool {
 	if flag := service.DeleteUser(uname); flag {

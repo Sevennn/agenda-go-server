@@ -1,9 +1,9 @@
 package api
 
 import (
-	"agenda-go-server/service/loghelper"
-	"agenda-go-server/service/service"
-	"agenda-go-server/service/entity"
+	"github.com/Sevennn/agenda-go-server/service/loghelper"
+	"github.com/Sevennn/agenda-go-server/service/service"
+	"github.com/Sevennn/agenda-go-server/service/entity"
 )
 
 func ListAllUser() []entity.User {

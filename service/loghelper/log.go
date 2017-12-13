@@ -51,8 +51,8 @@ func init() {
 		os.Exit(1)
 	}
 
-	infolog = getLogFile("/src/agenda-go-server/service/data/info.log")
-	errlog = getLogFile("/src/agenda-go-server/service/data/error.log")
+	infolog = getLogFile("/src/github.com/Sevennn/agenda-go-server/service/data/info.log")
+	errlog = getLogFile("/src/github.com/Sevennn/agenda-go-server/service/data/error.log")
 	set(infolog, os.Stdout, errlog)
 
 	Info.Println("Start up Info log")
@@ -87,7 +87,7 @@ func GetGOPATH() *string {
 	}
 	goPath := strings.Split(os.Getenv("GOPATH"), sp)
 	for _, v := range goPath {
-		if _, err := os.Stat(filepath.Join(v, "/src/agenda-go-server/service/data/")); !os.IsNotExist(err) {
+		if _, err := os.Stat(filepath.Join(v, "/src/github.com/Sevennn/agenda-go-server/service/data/")); !os.IsNotExist(err) {
 			return &v
 		}
 	}

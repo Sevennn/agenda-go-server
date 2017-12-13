@@ -1,8 +1,8 @@
 package service
 
 import (
-	"agenda-go-server/cli/entity"
-	"agenda-go-server/cli/loghelper"
+	"github.com/Sevennn/agenda-go-server/cli/entity"
+	"github.com/Sevennn/agenda-go-server/cli/loghelper"
 	"log"
 )
 

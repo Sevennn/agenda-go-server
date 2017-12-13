@@ -3,7 +3,7 @@ package entity
 import (
 	"errors"
 	"log"
-	"agenda-go-server/service/loghelper"
+	"github.com/Sevennn/agenda-go-server/service/loghelper"
 )
 
 // UserFilter : UserFilter types take an *User and return a bool value.
