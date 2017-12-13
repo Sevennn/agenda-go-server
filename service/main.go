@@ -2,7 +2,7 @@ package main
 
 import (
 	"os"
-	"agenda-go-server/service/routes"
+	"github.com/Sevennn/agenda-go-server/service/routes"
 	flag "github.com/spf13/pflag"
 )
 
