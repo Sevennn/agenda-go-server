@@ -1,6 +1,6 @@
 .LICENSE
 .gvm_local/
-agenda-go-cli
+github.com/Sevennn/agenda-go-server/cli
 # Binaries for programs and plugins
 *.exe
 *.dll

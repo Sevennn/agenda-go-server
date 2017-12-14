@@ -4,7 +4,7 @@ import (
 	"time"
  	"strings"
 	// "Date"
-	// "agenda-go-cli/loghelper"
+	// "github.com/Sevennn/agenda-go-server/cli/loghelper"
 )
 
 // Meeting :

@@ -1,7 +1,7 @@
 package entity
 
 import (
-	"agenda-go-cli/loghelper"
+	"github.com/Sevennn/agenda-go-server/cli/loghelper"
 	"os"
 	"reflect"
 	"testing"

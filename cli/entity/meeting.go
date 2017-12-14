@@ -5,7 +5,7 @@ package entity
 import (
  	"strings"
 	// "Date"
-	// "agenda-go-cli/loghelper"
+	// "github.com/Sevennn/agenda-go-server/cli/loghelper"
 )
 type Meeting struct {
 	Sponsor string

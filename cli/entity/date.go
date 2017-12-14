@@ -5,7 +5,7 @@ import (
     "fmt"
     "strconv"
     "errors"
-    // "agenda-go-cli/loghelper"
+    // "github.com/Sevennn/agenda-go-server/cli/loghelper"
 )
 type Date struct {
     Year, Month, Day, Hour, Minute int
