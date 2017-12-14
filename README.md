@@ -45,7 +45,7 @@
 ### 成功生成镜像
 
 [镜像地址](https://hub.docker.com/r/418057982/agenda-go-server/builds/)
-![](https://github.com/453326526/agenda-go-server/blob/master/photos/build%E6%88%90%E5%8A%9F.png)
+![](https://github.com/453326526/agenda-go-server/blob/master/photos/%E9%95%9C%E5%83%8F.png)
 
 ## Docker安装过程
 ### 使用 APT 镜像源 安装
